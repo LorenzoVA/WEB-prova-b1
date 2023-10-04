@@ -7,20 +7,50 @@ const ConsultaServices_1 = __importDefault(require("../services/ConsultaServices
 class ConsultaController {
     constructor() { }
     async listarConsulta(req, res) {
-        const consulta = await ConsultaServices_1.default.listarConsulta();
-        return res.status(200).json({
-            status: 'ok',
-            consulta: consulta,
-        });
+        const result = await ConsultaServices_1.default.listarConsulta();
+        if (result) {
+            res.status(200).json({
+                status: 'Consulta listada com sucesso',
+                consulta: result,
+            });
+        }
+        else {
+            res.status(200).json({
+                status: 'erro',
+            });
+        }
     }
     async atualizarConsulta(req, res) {
         return res.send('Atualizar Consulta');
     }
     async criarConsulta(req, res) {
-        return res.send('Criar Consulta');
+        const newConsulta = req.body;
+        const result = await ConsultaServices_1.default.criarConsulta(newConsulta);
+        if (result) {
+            res.status(200).json({
+                status: 'Consulta criada com sucesso',
+                consulta: result,
+            });
+        }
+        else {
+            res.status(200).json({
+                status: 'erro',
+            });
+        }
     }
     async deletarConsulta(req, res) {
-        return res.send('Deletar Consulta');
+        const id = req.params.id;
+        try {
+            await ConsultaServices_1.default.deletarConsulta(id);
+            res.status(200).json({
+                status: 'Consulta deletada com sucesso',
+            });
+        }
+        catch (error) {
+            res.status(200).json({
+                status: 'erro',
+            });
+        }
     }
 }
 exports.default = new ConsultaController();

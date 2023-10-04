@@ -24,10 +24,21 @@ class SecretariaServices {
             console.log(error);
         }
     }
-    async atualizarSecretaria() { }
+    async atualizarSecretaria(id, nome, rg) {
+        try {
+            const secretaria = await prisma.secretaria.update({
+                where: { id: id },
+                data: { nome: nome, rg: rg },
+            });
+            return secretaria;
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
     async deletarSecretaria(id) {
         try {
-            const secretaria = await prisma.secretaria.delete({
+            await prisma.secretaria.delete({
                 where: { id: id },
             });
             return console.log('Secretaria Deletada');

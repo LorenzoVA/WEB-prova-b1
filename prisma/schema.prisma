@@ -19,7 +19,7 @@ model Paciente {
 model Secretaria {
   id         String     @id @default(uuid())
   nome       String
-  rg         Int
+  rg         Int @unique
   consulta   Consulta[] @relation("Marcar Consulta")
   created_at DateTime   @default(now())
   updated_at DateTime   @default(now())

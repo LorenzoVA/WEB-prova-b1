@@ -42,7 +42,7 @@ class AgendaServices {
 
   async deletarAgenda(id: string) {
     try {
-      const agenda = await prisma.agenda.delete({
+      await prisma.agenda.delete({
         where: { id: id },
       });
       return console.log('Agenda Deletada');

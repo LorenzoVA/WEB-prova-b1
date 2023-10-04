@@ -14,7 +14,7 @@ app.use('/api', ConsultaRouter);
 app.use('/api', AgendaRouter);
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('hello world');
+  res.send('API - Lorenzo Venturini');
 });
 
 app.listen(port, () => {

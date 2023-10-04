@@ -25,11 +25,21 @@ class SecretariaServices {
     }
   }
 
-  async atualizarSecretaria() {}
+  async atualizarSecretaria(id: string, nome: string, rg: number) {
+    try {
+      const secretaria = await prisma.secretaria.update({
+        where: { id: id },
+        data: { nome: nome, rg: rg },
+      });
+      return secretaria;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async deletarSecretaria(id: string) {
     try {
-      const secretaria = await prisma.secretaria.delete({
+      await prisma.secretaria.delete({
         where: { id: id },
       });
       return console.log('Secretaria Deletada');

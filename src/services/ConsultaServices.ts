@@ -52,7 +52,7 @@ class ConsultaServices {
 
   async deletarConsulta(id: string) {
     try {
-      const consulta = await prisma.consulta.delete({
+      await prisma.consulta.delete({
         where: { id: id },
       });
       return console.log('consulta Deletada');

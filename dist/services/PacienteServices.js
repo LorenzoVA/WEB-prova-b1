@@ -38,7 +38,7 @@ class PacienteServices {
     }
     async deletarPaciente(id) {
         try {
-            const paciente = await prisma.paciente.delete({
+            await prisma.paciente.delete({
                 where: { id: id },
             });
             return console.log('paciente Deletado');

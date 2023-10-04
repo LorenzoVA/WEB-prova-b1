@@ -3,7 +3,7 @@ import PacienteController from '../controllers/PacienteController';
 
 const PacienteRouter = Router();
 
-PacienteRouter.get('/pacientes', PacienteController.listarPaciente);
+PacienteRouter.get('/paciente', PacienteController.listarPaciente);
 
 PacienteRouter.get('/paciente/:id', PacienteController.listarPaciente);
 

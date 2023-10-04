@@ -7,20 +7,50 @@ const AgendaServices_1 = __importDefault(require("../services/AgendaServices"));
 class AgendaController {
     constructor() { }
     async listarAgenda(req, res) {
-        const agenda = await AgendaServices_1.default.listarAgenda();
-        return res.status(200).json({
-            status: 'ok',
-            agenda: agenda,
-        });
+        const result = await AgendaServices_1.default.listarAgenda();
+        if (result) {
+            res.status(200).json({
+                status: 'Agenda listada com sucesso',
+                agenda: result,
+            });
+        }
+        else {
+            res.status(200).json({
+                status: 'erro',
+            });
+        }
     }
     async atualizarAgenda(req, res) {
         return res.send('Atualizar Agenda');
     }
     async criarAgenda(req, res) {
-        return res.send('Criar Agenda');
+        const newAgenda = req.body;
+        const result = await AgendaServices_1.default.criarAgenda(newAgenda);
+        if (result) {
+            res.status(200).json({
+                status: 'Agenda criada com sucesso',
+                agenda: result,
+            });
+        }
+        else {
+            res.status(200).json({
+                status: 'erro',
+            });
+        }
     }
     async deletarAgenda(req, res) {
-        return res.send('Deletar Agenda');
+        const id = req.params.id;
+        try {
+            await AgendaServices_1.default.deletarAgenda(id);
+            res.status(200).json({
+                status: 'Agenda deletada com sucesso',
+            });
+        }
+        catch (error) {
+            res.status(200).json({
+                status: 'erro',
+            });
+        }
     }
 }
 exports.default = new AgendaController();

@@ -16,7 +16,7 @@ app.use('/api', SecretariaRoutes_1.default);
 app.use('/api', ConsultaRoutes_1.default);
 app.use('/api', AgendaRoutes_1.default);
 app.get('/', (req, res) => {
-    res.send('hello world');
+    res.send('API - Lorenzo Venturini');
 });
 app.listen(port, () => {
     console.log(`Servidor rodando na porta: ${port}`);

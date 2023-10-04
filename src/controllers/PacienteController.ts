@@ -6,25 +6,29 @@ class PacienteController {
   constructor() {}
 
   async listarPaciente(req: Request, res: Response) {
-    const pacientes = await PacienteServices.listarPaciente();
-    return res.status(200).json({
-      status: 'ok',
-      pacientes: pacientes,
-    });
+    const result = await PacienteServices.listarPaciente();
+    if (result) {
+      res.status(200).json({
+        status: 'Paciente listado com sucesso',
+        paciente: result,
+      });
+    } else {
+      res.status(200).json({
+        status: 'erro',
+      });
+    }
   }
 
   async atualizarPaciente(req: Request, res: Response) {
-    return res.send('Atualizar Paciente');
+    return res.send('Atualizar Consulta');
   }
 
   async criarPaciente(req: Request, res: Response) {
     const newPaciente: Paciente = req.body;
-
     const result = await PacienteServices.criarPaciente(newPaciente);
-
     if (result) {
       res.status(200).json({
-        status: 'tudo ok',
+        status: 'Paciente criado com sucesso',
         paciente: result,
       });
     } else {
@@ -35,7 +39,17 @@ class PacienteController {
   }
 
   async deletarPaciente(req: Request, res: Response) {
-    return res.send('Deletar Paciente');
+    const id: string = req.params.id;
+    try {
+      await PacienteServices.deletarPaciente(id);
+      res.status(200).json({
+        status: 'Paciente deletado com sucesso',
+      });
+    } catch (error) {
+      res.status(200).json({
+        status: 'erro',
+      });
+    }
   }
 }
 
